@@ -6,12 +6,14 @@
 // ============================================================
 
 const PROFILE = {
-  name: "PLAYER ONE",              // <-- change to your gamer name!
+  name: "Leon Alexander",              // <-- change to your gamer name!
   tagline: "Gamer by day. Top student always.",
-  school: "Treasures in Heaven School, Antipolo",
+  school: "",
   grade: "Grade 4",                // <-- change to your grade
   age: 10,
-  avatar: "",                      // e.g. "images/me.png" (empty = 🎮 icon)
+  avatar: "images/me.jpg",         // your photo (empty "" = 🎮 icon)
+  avatarPos: "50% 50%",            // move the photo inside the circle: "left% top%" (try "50% 30%")
+  avatarZoom: 1,                   // zoom the photo: 1 = normal, 1.3 = closer
   about: "Hi! I love playing games and I also love learning new things. " +
          "On this page you can see my game screenshots, my blog, " +
          "my school stuff, and how I keep my grades strong while gaming.",

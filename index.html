@@ -6,146 +6,168 @@
 <title>My Gamer Profile</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#140c2b;--panel:#241a47;--ink:#f4f1ff;--y:#ffd23f;--p:#ff3e8a;--c:#3ee6ff;--g:#5cff7a;--dim:#8f84b8}
+:root{--bg:#060914;--ink:#e9f1ff;--dim:#8da0c2;--c:#5ee7ff;--g:#f3d9a0;--v:#8b7cff;--glass:rgba(255,255,255,.06);--line:rgba(160,200,255,.22)}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:var(--bg);color:var(--ink);font:24px/1.25 'VT323',monospace}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
-h1,h2,h3,.pf{font-family:'Press Start 2P',monospace;line-height:1.5;font-weight:400}
-h2{font-size:18px;color:var(--y);margin:0 0 20px;text-shadow:3px 3px 0 #000}
-h3{font-size:12px;margin:0 0 8px}
-a{color:var(--c)}
-:focus-visible{outline:3px dashed var(--y);outline-offset:3px}
-.wrap{max-width:980px;margin:0 auto;padding:0 18px}
-section{padding:44px 0}
-.box{background:var(--panel);border:4px solid var(--ink);box-shadow:6px 6px 0 #000;padding:16px}
-.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 19px/1.65 'Outfit',system-ui,sans-serif;overflow-x:hidden}
+:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+#fx,#glow{position:fixed;inset:0;pointer-events:none}
+#fx{z-index:0}
+#glow{z-index:1;background:radial-gradient(520px circle at var(--mx,50%) var(--my,40%),rgba(94,231,255,.10),transparent 60%)}
+header,main,footer{position:relative;z-index:2}
+section,.hero{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:90px 0}
+.wrap{width:min(1040px,92%);margin:0 auto}
+h2{font:500 clamp(28px,4.5vw,46px)/1.15 'Cinzel',serif;letter-spacing:.08em;margin:0 0 26px}
+h2::after{content:"";display:block;width:70px;height:2px;margin-top:14px;background:linear-gradient(90deg,var(--c),transparent)}
+h3{font:600 20px/1.3 'Outfit',sans-serif;margin:0 0 6px}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08);padding:22px}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.dim{color:var(--dim)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s,transform 1s}
+.rv.in{opacity:1;transform:none}
 
-nav{position:sticky;top:0;z-index:20;background:#0c0720;border-bottom:4px solid var(--p)}
-nav .wrap{display:flex;gap:6px 14px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
-nav a{font:10px 'Press Start 2P',monospace;color:var(--ink);text-decoration:none;padding:6px}
-nav a:hover{color:var(--y)}
-
-.hero{padding:50px 0 30px}
-.hero .wrap{display:grid;gap:26px;grid-template-columns:200px 1fr;align-items:center}
-.avatar{width:200px;height:200px;border:6px solid var(--y);box-shadow:8px 8px 0 var(--p);background:#0c0720;display:grid;place-items:center;font-size:90px;overflow:hidden;image-rendering:pixelated}
+/* hero */
+.hero{position:relative;overflow:hidden;text-align:center;align-items:center}
+.hero>*{will-change:transform}
+.hbg{position:absolute;inset:-12%;background:radial-gradient(ellipse at 50% 30%,#18295a,#060914 70%) center/cover}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.42}
+.o1{width:380px;height:380px;background:var(--v);left:8%;top:12%}
+.o2{width:320px;height:320px;background:var(--c);right:6%;bottom:10%}
+.layer{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.big{font:700 clamp(80px,21vw,300px)/1 'Cinzel',serif;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(160,200,255,.2)}
+.hc{position:relative;padding:0 16px}
+.avatar{width:min(220px,50vw);aspect-ratio:1;margin:0 auto 26px;border-radius:50%;border:2px solid var(--c);box-shadow:0 0 70px rgba(94,231,255,.5);display:grid;place-items:center;font-size:84px;overflow:hidden;background:#0b1530}
 .avatar img{width:100%;height:100%;object-fit:cover}
-h1{font-size:clamp(22px,5vw,40px);margin:0 0 12px;color:var(--c);text-shadow:4px 4px 0 var(--p)}
-.tag{font-size:28px;margin:0 0 6px}
-.sub{color:var(--dim);margin:0 0 18px}
-.xp{max-width:420px}
-.xp .pf{font-size:11px;margin-bottom:6px;display:flex;justify-content:space-between;gap:10px}
-.bar{height:22px;background:#0c0720;border:4px solid var(--ink)}
-.bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--g) 0 10px,#2fd45a 10px 12px);transition:width 1.4s steps(14)}
+h1{font:700 clamp(32px,7vw,74px)/1.1 'Cinzel',serif;letter-spacing:.12em;margin:0 0 12px;text-shadow:0 0 40px rgba(94,231,255,.55)}
+.tag{font-size:clamp(20px,2.6vw,28px);margin:0 0 6px;color:var(--g)}
+.xp{width:min(380px,80vw);margin:26px auto 0;font-size:15px}
+.xp div:first-child{display:flex;justify-content:space-between;margin-bottom:6px;color:var(--dim)}
+.bar{height:8px;border-radius:8px;background:rgba(255,255,255,.1);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--v),var(--c));box-shadow:0 0 14px var(--c);transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.hint{margin-top:34px;color:var(--dim);font-size:14px}
+.hint::after{content:"";display:block;width:1px;height:46px;margin:10px auto 0;background:linear-gradient(var(--c),transparent);animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}60%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
 
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.chip{font:10px 'Press Start 2P',monospace;background:var(--panel);color:var(--ink);border:3px solid var(--ink);padding:9px 10px;cursor:pointer}
-.chip[aria-pressed=true]{background:var(--y);color:#000;border-color:var(--y)}
-.about p{margin:0 0 14px;max-width:62ch}
-.games span{display:inline-block;margin:4px 6px 0 0;padding:2px 10px;border:3px solid var(--g);color:var(--g)}
+/* dots */
+.dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:14px}
+.dots a{width:12px;height:12px;border-radius:50%;border:2px solid var(--dim);display:block;transition:.3s;position:relative}
+.dots a.on{background:var(--c);border-color:var(--c);box-shadow:0 0 12px var(--c)}
+.dots a span{position:absolute;right:24px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:14px;opacity:0;pointer-events:none;background:#0c1330;padding:2px 10px;border-radius:8px;transition:.2s}
+.dots a:hover span,.dots a:focus-visible span{opacity:1}
 
-.ach{display:flex;gap:12px;align-items:flex-start}
-.ach .ic{font-size:40px}
-.ach.locked{opacity:.55;border-style:dashed;filter:grayscale(1)}
-.ach p{margin:0}
-.badge{font:9px 'Press Start 2P',monospace;display:inline-block;margin-top:8px;padding:5px 7px;color:#000;background:var(--g)}
-.locked .badge{background:var(--dim)}
-.ach.game{border-color:var(--c)}.ach.school{border-color:var(--p)}
-
-.shot{padding:0;cursor:pointer;text-align:left;color:inherit;font:inherit;width:100%}
-.thumb{aspect-ratio:16/10;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#3a1d7a,#16324f);overflow:hidden;border-bottom:4px solid var(--ink)}
-.thumb .ph{font:10px 'Press Start 2P',monospace;text-align:center;padding:10px;color:var(--c)}
-.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.shot .cap{padding:12px}
-.shot:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--p)}
-.lb{position:fixed;inset:0;z-index:60;background:rgba(5,2,15,.93);display:none;align-items:center;justify-content:center;padding:16px}
+/* content */
+.about p{max-width:60ch;margin:0 0 16px}
+.pill{display:inline-block;margin:5px 6px 0 0;padding:3px 14px;border:1px solid var(--line);border-radius:30px;background:rgba(94,231,255,.07)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{font:400 16px 'Outfit',sans-serif;color:var(--ink);background:var(--glass);border:1px solid var(--line);border-radius:30px;padding:6px 18px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--c);color:#04101c;border-color:var(--c);box-shadow:0 0 18px rgba(94,231,255,.5)}
+.reel{overflow:hidden}
+.track{display:flex;width:max-content;padding:10px 0}
+.cart{flex:none;width:250px;height:150px;margin-right:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:12px;font:500 17px/1.3 'Cinzel',serif;letter-spacing:.05em}
+.cart b{font-size:34px;font-weight:400}
+.ach{display:flex;gap:14px;align-items:flex-start}
+.ach .ic{font-size:38px;line-height:1}
+.ach.on{border-color:rgba(94,231,255,.55);box-shadow:0 0 28px rgba(94,231,255,.18),inset 0 1px 0 rgba(255,255,255,.08)}
+.ach.lock{opacity:.5;filter:grayscale(1)}
+.ach p{margin:0;font-size:17px}
+.tg{display:inline-block;margin-top:8px;font-size:13px;color:var(--g);border:1px solid rgba(243,217,160,.4);border-radius:20px;padding:0 10px}
+.shot{padding:0;overflow:hidden;cursor:pointer;color:inherit;font:inherit;text-align:left;width:100%;transition:transform .3s,box-shadow .3s}
+.shot:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(94,231,255,.25)}
+.thumb{aspect-ratio:16/10;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#1c2b66,#0d1a33);overflow:hidden}
+.thumb .ph{text-align:center;padding:10px;color:var(--c);font-size:16px}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.shot:hover img{transform:scale(1.07)}
+.cap{padding:14px 18px 18px}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(3,5,12,.94);display:none;align-items:center;justify-content:center;padding:16px}
 .lb.on{display:flex}
-.lb .in{max-width:860px;width:100%;text-align:center}
-.lb .thumb{aspect-ratio:16/9;max-height:62vh;border:4px solid var(--ink)}
-.lb .row{display:flex;gap:10px;justify-content:center;margin-top:14px}
-.btn{font:10px 'Press Start 2P',monospace;background:var(--p);color:#fff;border:3px solid var(--ink);padding:12px 14px;cursor:pointer;box-shadow:4px 4px 0 #000}
-.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 #000}
-
+.lb .in{max-width:880px;width:100%;text-align:center}
+.lb .thumb{aspect-ratio:16/9;max-height:62vh;border-radius:14px;border:1px solid var(--line)}
+.row{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.btn{font:400 16px 'Outfit',sans-serif;color:var(--ink);background:var(--glass);border:1px solid var(--line);border-radius:30px;padding:8px 22px;cursor:pointer}
+.btn:hover{background:var(--c);color:#04101c}
 details.post{margin-bottom:18px}
 details summary{cursor:pointer;list-style:none}
 details summary::-webkit-details-marker{display:none}
-.meta{color:var(--dim);margin:6px 0 0}
-.meta b{color:var(--p);font-weight:400}
-.post .body{margin-top:14px;max-width:62ch;border-top:3px dashed var(--dim);padding-top:14px}
+.post .body{margin-top:14px;max-width:62ch;border-top:1px solid var(--line);padding-top:14px}
 .post .body p{margin:0 0 12px}
-.read{color:var(--y);margin-top:10px;font:10px 'Press Start 2P',monospace}
+.read{color:var(--c);margin-top:8px;font-size:15px}
 details[open] .read{display:none}
-
-.stat{margin-bottom:16px}
-.stat .pf{font-size:11px;display:flex;justify-content:space-between;margin-bottom:6px}
-.stat .bar i{background:repeating-linear-gradient(90deg,var(--c) 0 10px,#22b5d1 10px 12px)}
 .two{display:grid;gap:22px;grid-template-columns:1fr 1fr}
-.ft{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-bottom:8px}
-.ft .pf{font-size:10px;color:var(--c)}
-.ft .pf.s{color:var(--p)}
+.stat{margin-bottom:18px}
+.stat div:first-child{display:flex;justify-content:space-between;margin-bottom:6px}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+.pairs .hd{font:500 15px 'Cinzel',serif;color:var(--c);letter-spacing:.1em}
+.pairs .hd.s{color:var(--g)}
 ul.rules{list-style:none;padding:0;margin:0}
-ul.rules li{padding:6px 0 6px 34px;position:relative}
-ul.rules li::before{content:"✔";position:absolute;left:0;color:var(--g);font-size:26px}
-
-footer{border-top:4px solid var(--p);padding:26px 0 40px;text-align:center;color:var(--dim)}
-@media(max-width:700px){.hero .wrap,.two{grid-template-columns:1fr}.avatar{width:140px;height:140px;font-size:64px}body{font-size:22px}}
-@media(prefers-reduced-motion:reduce){.bar i{transition:none}html{scroll-behavior:auto}}
+ul.rules li{padding:5px 0 5px 30px;position:relative}
+ul.rules li::before{content:"✦";position:absolute;left:0;color:var(--c)}
+footer{padding:50px 0 60px;text-align:center;color:var(--dim);border-top:1px solid var(--line)}
+@media(max-width:700px){.two,.pairs{grid-template-columns:1fr}.dots{right:8px;gap:10px}body{font-size:18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.hint::after{animation:none}.bar i{transition:none}}
 </style>
 </head>
 <body>
-<nav><div class="wrap">
-  <a href="#about">About</a><a href="#achievements">Achievements</a><a href="#gallery">Gallery</a>
-  <a href="#blog">Blog</a><a href="#school">School</a><a href="#balance">Games + School</a>
-</div></nav>
+<canvas id="fx"></canvas><div id="glow"></div>
+<nav class="dots" id="dots" aria-label="Sections"></nav>
 
-<header class="hero"><div class="wrap">
-  <div class="avatar" id="avatar"></div>
-  <div>
+<header class="hero" id="top" data-label="Home">
+  <div class="hbg" id="hbg" data-d=".3"></div>
+  <div class="orb o1" data-d="1.2"></div><div class="orb o2" data-d="1.8"></div>
+  <div class="layer" data-d=".7"><div class="big" id="big"></div></div>
+  <div class="hc" data-d=".15">
+    <div class="avatar" id="avatar"></div>
     <h1 id="name"></h1>
     <p class="tag" id="tagline"></p>
-    <p class="sub" id="sub"></p>
-    <div class="xp"><div class="pf"><span id="lvl"></span><span id="xpt"></span></div>
+    <p class="dim" id="sub" style="margin:0"></p>
+    <div class="xp"><div><span id="lvl"></span><span id="xpt"></span></div>
       <div class="bar" role="progressbar" aria-label="Achievements unlocked"><i id="xpbar"></i></div></div>
+    <div class="hint">Scroll down</div>
   </div>
-</div></header>
+</header>
 
-<main class="wrap">
-  <section id="about"><h2>About Me</h2>
-    <div class="box about"><p id="aboutText"></p><h3>Games I play</h3><div class="games" id="games"></div></div></section>
+<main>
+  <section id="about" data-label="About"><div class="wrap">
+    <h2>About Me</h2>
+    <div class="glass about"><p id="aboutText"></p><h3>Games I play</h3><div id="games"></div></div></div></section>
 
-  <section id="achievements"><h2>Achievements</h2>
-    <div class="chips" id="achFilter"></div><div class="grid" id="achGrid"></div></section>
+  <section id="reel" class="reel" data-label="Favorite Games"><div class="wrap"><h2>Favorite Games</h2></div>
+    <div><div class="track" id="t1"></div><div class="track" id="t2"></div></div></section>
 
-  <section id="gallery"><h2>Game Gallery</h2>
-    <div class="chips" id="galFilter"></div><div class="grid" id="galGrid"></div></section>
+  <section id="achievements" data-label="Achievements"><div class="wrap">
+    <h2>Achievements</h2><div class="chips" id="achFilter"></div><div class="grid" id="achGrid"></div></div></section>
 
-  <section id="blog"><h2>My Blog</h2><div id="posts"></div></section>
+  <section id="gallery" data-label="Gallery"><div class="wrap">
+    <h2>Game Gallery</h2><div class="chips" id="galFilter"></div><div class="grid" id="galGrid"></div></div></section>
 
-  <section id="school"><h2>School Stats</h2>
+  <section id="blog" data-label="Blog"><div class="wrap"><h2>My Blog</h2><div id="posts"></div></div></section>
+
+  <section id="school" data-label="School"><div class="wrap">
+    <h2>School Stats</h2>
     <div class="two">
-      <div class="box"><h3>Favorite Subjects</h3><br><div id="subjects"></div></div>
-      <div class="box"><h3 id="schoolName"></h3><p class="meta" id="gradeInfo"></p></div>
+      <div class="glass"><h3>Favorite Subjects</h3><br><div id="subjects"></div></div>
+      <div class="glass"><h3 id="schoolName"></h3><p class="dim" id="gradeInfo" style="margin:0"></p></div>
     </div>
-    <h2 style="margin-top:34px">Fun Projects</h2><div class="grid" id="projects"></div></section>
+    <h2 style="margin-top:44px">Fun Projects</h2><div class="grid" id="projects"></div></div></section>
 
-  <section id="balance"><h2>Gamer + Top Student</h2>
-    <div class="box">
+  <section id="balance" data-label="Games + School"><div class="wrap">
+    <h2>Gamer + Top Student</h2>
+    <div class="glass">
       <p style="margin-top:0">Playing games does not stop me from doing great in school. Here is how I make both work:</p>
-      <div class="ft"><span class="pf">In the game</span><span class="pf s">At school</span></div>
-      <div class="ft" id="skills"></div>
+      <div class="pairs"><span class="hd">In the game</span><span class="hd s">At school</span></div>
+      <div class="pairs" id="skills" style="margin-top:8px"></div>
     </div>
-    <div class="box" style="margin-top:18px"><h3>My Player Rules</h3><br><ul class="rules" id="rules"></ul></div>
-  </section>
+    <div class="glass" style="margin-top:20px"><h3>My Player Rules</h3><br><ul class="rules" id="rules"></ul></div>
+  </div></section>
 </main>
 
-<footer><div class="wrap">Made by <span id="fname"></span> with a little help from family. Press START to keep learning!</div></footer>
+<footer><div class="wrap">Made by <span id="fname"></span> with a little help from family.</div></footer>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
-  <div class="in"><div class="thumb" id="lbImg"></div>
-    <h3 id="lbTitle" style="margin-top:14px;color:var(--y)"></h3><p id="lbNote" style="margin:4px 0 0"></p>
-    <div class="row"><button class="btn" id="prev">◀ Back</button><button class="btn" id="close">Close</button><button class="btn" id="next">Next ▶</button></div>
+  <div class="in"><div id="lbBox"></div>
+    <h3 id="lbTitle" style="margin-top:16px;color:var(--g)"></h3><p id="lbNote" class="dim" style="margin:4px 0 0"></p>
+    <div class="row"><button class="btn" id="prev">Back</button><button class="btn" id="close">Close</button><button class="btn" id="next">Next</button></div>
   </div>
 </div>
 
@@ -153,15 +175,15 @@ footer{border-top:4px solid var(--p);padding:26px 0 40px;text-align:center;color
 <script>
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function thumb(img,label){
-  return '<div class="thumb"><div class="ph">🖼️<br><br>'+esc(label)+'</div>'+
+  return '<div class="thumb"><div class="ph">🖼️<br>'+esc(label)+'</div>'+
     (img?'<img src="'+esc(img)+'" alt="'+esc(label)+'" loading="lazy" onerror="this.remove()">':'')+'</div>';
 }
 function chips(el,items,cb){
   el.innerHTML='';
   items.forEach((t,i)=>{
-    const b=document.createElement('button');b.className='chip';b.textContent=t;
-    b.setAttribute('aria-pressed',i===0);
+    const b=document.createElement('button');b.className='chip';b.textContent=t;b.setAttribute('aria-pressed',i===0);
     b.onclick=()=>{[...el.children].forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');cb(t)};
     el.appendChild(b);
   });
@@ -169,62 +191,104 @@ function chips(el,items,cb){
 
 // Hero
 document.title=PROFILE.name+' | Gamer Profile';
-$('name').textContent=PROFILE.name;$('fname').textContent=PROFILE.name;
+$('name').textContent=PROFILE.name;$('fname').textContent=PROFILE.name;$('big').textContent=PROFILE.name;
 $('tagline').textContent=PROFILE.tagline;
 $('sub').textContent='Age '+PROFILE.age+' • '+PROFILE.grade+' • '+PROFILE.school;
-$('avatar').innerHTML=PROFILE.avatar?'<img src="'+esc(PROFILE.avatar)+'" alt="Me" onerror="this.parentNode.textContent=\'🎮\'">':'🎮';
+$('avatar').innerHTML=PROFILE.avatar?'<img src="'+esc(PROFILE.avatar)+'" style="object-position:'+esc(PROFILE.avatarPos||'50% 50%')+';transform:scale('+(+PROFILE.avatarZoom||1)+')" alt="Me" onerror="this.parentNode.textContent=\'🎮\'">':'🎮';
+if(GALLERY[0]&&GALLERY[0].image){const im=new Image();im.onload=()=>$('hbg').style.backgroundImage='linear-gradient(rgba(6,9,20,.62),#060914),url("'+GALLERY[0].image+'")';im.src=GALLERY[0].image}
 $('aboutText').textContent=PROFILE.about;
-$('games').innerHTML=PROFILE.games.map(g=>'<span>'+esc(g)+'</span>').join('');
+$('games').innerHTML=PROFILE.games.map(g=>'<span class="pill">'+esc(g)+'</span>').join('');
 const got=ACHIEVEMENTS.filter(a=>a.unlocked).length;
-$('lvl').textContent='LEVEL '+got;$('xpt').textContent=got+'/'+ACHIEVEMENTS.length+' unlocked';
-requestAnimationFrame(()=>setTimeout(()=>$('xpbar').style.width=(got/ACHIEVEMENTS.length*100)+'%',200));
+$('lvl').textContent='Level '+got;$('xpt').textContent=got+'/'+ACHIEVEMENTS.length+' unlocked';
+setTimeout(()=>$('xpbar').style.width=(got/ACHIEVEMENTS.length*100)+'%',300);
+
+// Favorite games reel
+const icons=['🎮','🕹️','⚔️','👾','🏴‍☠️','🧱'];
+const cards=PROFILE.games.map((g,i)=>'<div class="glass cart"><b>'+icons[i%icons.length]+'</b>'+esc(g)+'</div>').join('');
+$('t1').innerHTML=cards+cards+cards;$('t2').innerHTML=cards+cards+cards;
 
 // Achievements
 function drawAch(f){
-  $('achGrid').innerHTML=ACHIEVEMENTS.filter(a=>f==='All'||(f==='Game'&&a.type==='game')||(f==='School'&&a.type==='school')).map(a=>
-    '<div class="box ach '+a.type+(a.unlocked?'':' locked')+'"><div class="ic">'+(a.unlocked?a.icon:'🔒')+'</div><div><h3>'+esc(a.title)+'</h3><p>'+esc(a.desc)+'</p><span class="badge">'+(a.unlocked?'UNLOCKED':'LOCKED GOAL')+'</span></div></div>').join('');
+  $('achGrid').innerHTML=ACHIEVEMENTS.filter(a=>f==='All'||a.type===f.toLowerCase()).map(a=>
+    '<div class="glass ach '+(a.unlocked?'on':'lock')+'"><div class="ic">'+(a.unlocked?a.icon:'🔒')+'</div><div><h3>'+esc(a.title)+'</h3><p>'+esc(a.desc)+'</p><span class="tg">'+(a.unlocked?'Unlocked':'Locked goal')+'</span></div></div>').join('');
 }
 chips($('achFilter'),['All','Game','School'],drawAch);drawAch('All');
 
-// Gallery + lightbox
+// Gallery + viewer
 let shown=[],cur=0;
 function drawGal(f){
   shown=GALLERY.filter(g=>f==='All'||g.game===f);
   $('galGrid').innerHTML=shown.map((g,i)=>
-    '<button class="box shot" data-i="'+i+'" aria-label="Open '+esc(g.title)+'">'+thumb(g.image,g.title)+
+    '<button class="glass shot" data-i="'+i+'" aria-label="Open '+esc(g.title)+'">'+thumb(g.image,g.title)+
     '<div class="cap"><h3>'+esc(g.title)+'</h3><span style="color:var(--c)">'+esc(g.game)+'</span></div></button>').join('');
-  [...$('galGrid').children].forEach(b=>b.onclick=()=>open(+b.dataset.i));
+  [...$('galGrid').children].forEach(b=>b.onclick=()=>show(+b.dataset.i));
 }
-function open(i){
+function show(i){
   cur=(i+shown.length)%shown.length;const g=shown[cur];
-  $('lbImg').outerHTML=thumb(g.image,g.title).replace('class="thumb"','class="thumb" id="lbImg"');
+  $('lbBox').innerHTML=thumb(g.image,g.title);
   $('lbTitle').textContent=g.title;$('lbNote').textContent=g.note||'';$('lb').classList.add('on');$('close').focus();
 }
 const shut=()=>$('lb').classList.remove('on');
-$('close').onclick=shut;$('prev').onclick=()=>open(cur-1);$('next').onclick=()=>open(cur+1);
+$('close').onclick=shut;$('prev').onclick=()=>show(cur-1);$('next').onclick=()=>show(cur+1);
 $('lb').onclick=e=>{if(e.target===$('lb'))shut()};
 document.addEventListener('keydown',e=>{
   if(!$('lb').classList.contains('on'))return;
-  if(e.key==='Escape')shut();if(e.key==='ArrowLeft')open(cur-1);if(e.key==='ArrowRight')open(cur+1);
+  if(e.key==='Escape')shut();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);
 });
 chips($('galFilter'),['All',...new Set(GALLERY.map(g=>g.game))],drawGal);drawGal('All');
 
 // Blog
 $('posts').innerHTML=POSTS.map(p=>
-  '<details class="box post"><summary><h3>'+esc(p.title)+'</h3><p class="meta"><b>'+esc(p.tag)+'</b> • '+esc(p.date)+'</p><div class="read">▶ READ POST</div></summary>'+
+  '<details class="glass post"><summary><h3>'+esc(p.title)+'</h3><span class="dim">'+esc(p.tag)+' • '+esc(p.date)+'</span><div class="read">Read post</div></summary>'+
   '<div class="body">'+p.text.split('\n\n').map(t=>'<p>'+esc(t)+'</p>').join('')+'</div></details>').join('');
 
 // School
 $('subjects').innerHTML=SUBJECTS.map(s=>
-  '<div class="stat"><div class="pf"><span>'+s.icon+' '+esc(s.name)+'</span><span>'+s.score+'</span></div><div class="bar"><i style="width:'+s.score+'%"></i></div></div>').join('');
+  '<div class="stat"><div><span>'+s.icon+' '+esc(s.name)+'</span><span>'+s.score+'</span></div><div class="bar"><i style="width:'+s.score+'%"></i></div></div>').join('');
 $('schoolName').textContent=PROFILE.school;
 $('gradeInfo').textContent=PROFILE.grade+' student. Learning something new every day.';
 $('projects').innerHTML=PROJECTS.map(p=>
-  '<div class="box" style="padding:0">'+thumb(p.image,p.icon+' '+p.title)+'<div class="cap" style="padding:12px"><h3>'+esc(p.title)+'</h3><span style="color:var(--p)">'+esc(p.subject)+'</span><p style="margin:6px 0 0">'+esc(p.text)+'</p></div></div>').join('');
+  '<div class="glass" style="padding:0;overflow:hidden">'+thumb(p.image,p.icon+' '+p.title)+'<div class="cap"><h3>'+esc(p.title)+'</h3><span style="color:var(--g)">'+esc(p.subject)+'</span><p style="margin:6px 0 0">'+esc(p.text)+'</p></div></div>').join('');
 
 // Balance
 $('skills').innerHTML=BALANCE.skills.map(s=>'<span>'+esc(s.game)+'</span><span>'+esc(s.school)+'</span>').join('');
 $('rules').innerHTML=BALANCE.rules.map(r=>'<li>'+esc(r)+'</li>').join('');
+
+// Side dots + highlight current section
+const secs=[...document.querySelectorAll('[data-label]')];
+$('dots').innerHTML=secs.map(s=>'<a href="#'+s.id+'" aria-label="'+esc(s.dataset.label)+'"><span>'+esc(s.dataset.label)+'</span></a>').join('');
+const dl=[...$('dots').children];
+const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){dl.forEach(d=>d.classList.remove('on'));dl[secs.indexOf(e.target)].classList.add('on')}}),{threshold:.45});
+secs.forEach(s=>spy.observe(s));
+
+// Fade-in reveal as each part scrolls into view
+const rvEls=[...document.querySelectorAll('main section>*')];
+rvEls.forEach(e=>e.classList.add('rv'));
+const rvo=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}}),{threshold:.12});
+rvEls.forEach(e=>rvo.observe(e));
+
+// Mouse glow + parallax + sparkles + moving game rows (one animation loop)
+let mx=0,my=0;
+addEventListener('pointermove',e=>{
+  mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;
+  document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px');
+});
+const cv=$('fx'),cx=cv.getContext('2d');let W,H;
+const size=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};size();addEventListener('resize',size);
+const P=Array.from({length:75},(_,i)=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.7+.4,s:Math.random()*.35+.1,t:Math.random()*6,c:i%4?'94,231,255':'243,217,160'}));
+const layers=[...document.querySelectorAll('[data-d]')];
+const t1=$('t1'),t2=$('t2');let drift=0;
+function frame(){
+  const sy=scrollY;
+  if(sy<innerHeight*1.2)layers.forEach(el=>{const d=+el.dataset.d;el.style.transform='translate3d('+(-mx*d*60)+'px,'+(-my*d*40+sy*d*.35)+'px,0)'});
+  cx.clearRect(0,0,W,H);
+  P.forEach(p=>{p.y-=p.s;p.x+=Math.sin(p.t+=.01)*.25;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}
+    cx.fillStyle='rgba('+p.c+','+(.35+.35*Math.sin(p.t*3))+')';cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.3);cx.fill()});
+  const w=t1.scrollWidth/3,pos=(drift+sy*.7)%w;
+  t1.style.transform='translateX('+(-pos)+'px)';t2.style.transform='translateX('+(pos-w)+'px)';
+  drift+=.5;requestAnimationFrame(frame);
+}
+if(still){cv.remove()}else{frame()}
 </script>
 </body>
 </html>
